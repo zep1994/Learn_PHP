@@ -1,12 +1,19 @@
-<!DOCTYPE html>
+<?php
+$cookie_name = "user";
+$cookie_value = "Alex Porter";
+setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
+?>
 <html>
 <body>
 
-<form action="site.php" method="post" enctype="multipart/form-data">
-    Select image to upload:
-    <input type="file" name="fileToUpload" id="fileToUpload">
-    <input type="submit" value="Upload Image" name="submit">
-</form>
+<?php
+if(!isset($_COOKIE[$cookie_name])) {
+    echo "Cookie named '" . $cookie_name . "' is not set!";
+} else {
+    echo "Cookie '" . $cookie_name . "' is set!<br>";
+    echo "Value is: " . $_COOKIE[$cookie_name];
+}
+?>
 
 </body>
 </html>
