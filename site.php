@@ -1,50 +1,16 @@
-    <?php
-    // define variables and set to empty values
-    $nameErr = $emailErr = $genderErr = $websiteErr = "";
-    $name = $email = $gender = $comment = $website = "";
-
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-      if (empty($_POST["name"])) {
-        $nameErr = "Name is required";
-      } else {
-        $name = test_input($_POST["name"]);
-        if (!preg_match("/^[a-zA-Z]*$/",$name)); {
-           $nameErr = "Name must in aplhanumeric characters";
+<?php 
+    $target_dir = "C:\xampp\htdocs\Learn_PHP";
+    $target_dir = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($target_dir, PATHINFO_EXTENSION));
+    // Check if image file is a actual image or fake image
+    if (isset($_POST["submit"])) {
+        $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+        if($check !== false) {
+            echo "File is an image - " . $check["mime"] . ".";          
+        } else {
+            echo "File is not an image.";
+            $uploadOK = 0;
         }
-      }
-
-      if (empty($_POST["email"])) {
-        $emailErr = "Email is required";
-      } else {
-        $email = test_input($_POST["email"]);
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $emailErr = "Invalid Email";
-        }
-      }
-
-      if (empty($_POST["website"])) {
-        $website = "";
-      } else {
-        $website = test_input($_POST["website"]);
-      }
-
-      if (empty($_POST["comment"])) {
-        $comment = "";
-      } else {
-        $comment = test_input($_POST["comment"]);
-      }
-
-      if (empty($_POST["gender"])) {
-        $genderErr = "Gender is required";
-      } else {
-        $gender = test_input($_POST["gender"]);
-      }
     }
-
-    function test_input($data) {
-      $data = trim($data);
-      $data = stripslashes($data);
-      $data = htmlspecialchars($data);
-      return $data;
-    }
-    ?>
+  ?>
