@@ -1,4 +1,4 @@
-<?php
+    <?php
     // define variables and set to empty values
     $nameErr = $emailErr = $genderErr = $websiteErr = "";
     $name = $email = $gender = $comment = $website = "";
@@ -8,12 +8,18 @@
         $nameErr = "Name is required";
       } else {
         $name = test_input($_POST["name"]);
+        if (!preg_match("/^[a-zA-Z]*$/",$name)); {
+           $nameErr = "Name must in aplhanumeric characters";
+        }
       }
 
       if (empty($_POST["email"])) {
         $emailErr = "Email is required";
       } else {
         $email = test_input($_POST["email"]);
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $emailErr = "Invalid Email";
+        }
       }
 
       if (empty($_POST["website"])) {
@@ -41,5 +47,4 @@
       $data = htmlspecialchars($data);
       return $data;
     }
-    
-?>
+    ?>
