@@ -8,6 +8,7 @@
 
 $conn = mysqli_connect('localhost', 'root', '', 'login');
 
+
 if ($conn) {
     echo "Connected";
 } else {

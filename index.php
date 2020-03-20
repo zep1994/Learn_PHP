@@ -1,5 +1,28 @@
 <?php
     include './data/db.php';
+    
+     if(isset($_POST['submit'])) {
+        $username = $_POST['username'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+            
+            $query = "INSERT INTO users(username, email, password) ";
+            $query .= "VALUES ('$username', '$email', '$password')";
+            
+            $result = mysqli_query($conn, $query);
+            
+            if (!$result) {
+                die('query failed');
+            }        
+                    
+        if($username && $email && $password) {
+            echo $username;
+            echo $email;
+            echo $password;
+        } else {
+            echo "All Values are required";
+        }
+    }
 ?>
 <html>
     <head>
@@ -16,10 +39,14 @@
                     <input type="text" name="email" class="form-control" />
 
                     <label for="password" class="form"/>Password</label>
-                    <input type="text" name="password" class="form-control" />   
+                    <input type="password" name="password" class="form-control" />   
 
                     <input type="submit" name="submit" class="btn btn-primary" />
                 </form>
+                
+                 <?php 
+                    
+                ?>
             </div>
         </div>
     </body>
